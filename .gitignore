@@ -1,7 +1,3 @@
-# file with secret info
-userinfo.js
-populatedb.js
-
 # Logs
 logs
 *.log
