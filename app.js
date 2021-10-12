@@ -7,13 +7,14 @@ var logger = require('morgan');
 // importing routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const wikiRouter = require('./routes/wiki')
+const wikiRouter = require('./routes/wiki');
+const catalogRouter = require('./routes/catalog');
 
 var app = express();
 
 //import secret info
-const userinfo = require('userinfo');
-const password = userinfo.pass;
+const userinfo = require('./userinfo');
+const password = encodeURIComponent(userinfo.pass);
 // connect to mongodb
 
 //Import the mongoose module
@@ -42,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/wiki', wikiRouter);
+app.use('/catalog', catalogRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
