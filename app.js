@@ -14,9 +14,8 @@ var app = express();
 
 //import secret info
 const userinfo = require('./userinfo');
-const password = encodeURIComponent(userinfo.pass);
 // connect to mongodb
-
+const password = encodeURIComponent(process.env.MONGO_PASS);
 //Import the mongoose module
 var mongoose = require('mongoose');
 
