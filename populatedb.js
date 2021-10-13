@@ -1,11 +1,10 @@
 #! /usr/bin/env node
 
-console.log(
-  'populatin db... ');
+console.log('populatin db... ');
 
 // Get arguments passed on command line
 var userArgs = process.argv.slice(2);
-console.log(userArgs)
+console.log(userArgs);
 /* if (!userArgs[0].startsWith('mongodb')) {
     console.log('ERROR: You need to specify a valid mongodb URL as the first argument');
     return
@@ -21,7 +20,6 @@ var mongoose = require('mongoose');
 var mongoDB = userArgs[0];
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
-
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -324,5 +322,5 @@ async.series(
     }
     // All done, disconnect from database
     mongoose.connection.close();
-  },
+  }
 );
