@@ -4,7 +4,7 @@ const Genre = require('../models/genre');
 const BookInstance = require('../models/bookinstance');
 
 const async = require('async');
-
+// displays home page with all  counts for  author/bookinstance/book.genre
 exports.index = function (req, res) {
   async.parallel(
     {
@@ -34,14 +34,24 @@ exports.index = function (req, res) {
   );
 };
 
-// Display list of all books.
-exports.book_list = function (req, res) {
-  res.send('NOT IMPLEMENTED: Book list');
+// Display list of all Books.
+exports.book_list = function (req, res, next) {
+  Book.find({}, 'title author')
+    .sort({ title: 1 })
+    .populate('author')
+    .exec(function (err, list_books) {
+      if (err) {
+        return next(err);
+      }
+      //Successful, so render
+      res.render('book_list', { title: 'Book List', book_list: list_books });
+    });
 };
 
 // Display detail page for a specific book.
 exports.book_detail = function (req, res) {
-  res.send('NOT IMPLEMENTED: Book detail: ' + req.params.id);
+  Book.find({id:req.params.id})
+  res.render('NOT IMPLEMENTED: Book detail: ' + req.params.id);
 };
 
 // Display book create form on GET.
